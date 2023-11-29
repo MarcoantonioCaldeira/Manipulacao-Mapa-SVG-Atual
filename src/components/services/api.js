@@ -1,16 +1,31 @@
 import axios from 'axios';
 
-const api = axios.create({
+export const api_empreendimento = axios.create({
     baseURL: "http://192.168.0.78:9100"
 })
 
-api.interceptors.request.use(
+export const api_imoveis = axios.create({
+    baseURL: "http://192.168.0.78:9200"
+})
+
+
+api_empreendimento.interceptors.request.use(
     (config) => {
-        const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaUdlc3RvciIsInN1YiI6IlRpR2VzdG9yIiwiZXhwIjoxNzAwODQxNzEwLCJpZF91c3VhcmlvIjoxMjh9.e-M7zm49hNxrbwtZZt-Oi72cN2SVxCoKsyDE8pW97Fg";
+        const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaUdlc3RvciIsInN1YiI6IlRpR2VzdG9yIiwiZXhwIjoxNzAxMzQ1NDY1LCJpZF91c3VhcmlvIjoxMjh9.Ju-VugxVHwt-qir8VCKL903Rz5YPtn0pvwHa-1MhvOE";
 
         config.headers.Authorization = `Bearer ${token}`;
         return config;
     }
 );
 
-export default api;
+
+api_imoveis.interceptors.request.use(
+    (config) => {
+        const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaUdlc3RvciIsInN1YiI6IlRpR2VzdG9yIiwiZXhwIjoxNzAxMzQ1NDY1LCJpZF91c3VhcmlvIjoxMjh9.Ju-VugxVHwt-qir8VCKL903Rz5YPtn0pvwHa-1MhvOE";
+
+        config.headers.Authorization = `Bearer ${token}`;
+        return config;
+    }
+);
+
+
