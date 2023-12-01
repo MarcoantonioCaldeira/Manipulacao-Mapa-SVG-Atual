@@ -1,4 +1,7 @@
 <template>
+  <div class="Topo">
+      
+  </div>
   <div class="hello">
     <h1>Selecione o Empreendimento</h1>
 
@@ -9,7 +12,14 @@
     </select>
 
     <div  id="Area_Mapa">
-      <img  class="img_mapa"  v-if="empreendimentoDetalhes && Pegar_Imagem()" :src="Pegar_Imagem()" alt="Mapa SVG" />
+      <img
+        class="img_mapa"
+        v-if="empreendimentoDetalhes && Pegar_Imagem()"
+        :src="Pegar_Imagem()"
+        alt="Mapa SVG"
+        ref="mapaContainer"
+        @load="ClicarEmLote"
+      />
     </div>
 
     <div v-if="imoveis.length > 0" >
@@ -21,6 +31,14 @@
         <option value="C">C</option>
         <option value="D">D</option>
         <option value="E">E</option>
+        <option value="F">F</option>
+        <option value="I">I</option>
+        <option value="J">J</option>
+        <option value="L">L</option>
+        <option value="M">M</option>
+        <option value="N">N</option>
+        <option value="O">O</option>
+        <option value="P">P</option>
       </select>
       
 
@@ -176,8 +194,43 @@ export default {
         .catch(error => {
           console.error("Erro ao buscar os imoveis", error);
         })
-      }
+      },
 
+
+
+      //Manipulação Inicial do Mapa
+      // configurarCliqueLotes() {
+      //   const svgElement = this.$refs.mapaSVG;
+
+      //   if (svgElement) {
+      //     svgElement.addEventListener('load', this.ConfigurarClique, { once: true });
+      //   }
+      // },
+
+      // ConfigurarClique(){
+      //   const svgElement = this.$refs.mapaSVG.contentDocument;
+      //   svgElement.addEventListener('click', this.ClicarEmLote);
+      // },
+
+      ClicarEmLote() {
+
+        const obj = this.$refs.mapaContainer;
+        const objElement = obj.querySelector('svg')
+
+        if (objElement) {
+
+          objElement.addEventListener('click', (event) => {
+            const clickedElement = event.target.closest('.alote');
+            if (clickedElement) {
+              // Lógica para mudar a cor do lote clicado ou outras ações
+              clickedElement.style.fill = 'red';
+              // console.log("Mudando de cor")
+            }
+          });
+
+        }
+
+      },
 
     }
   }
@@ -186,14 +239,5 @@ export default {
 </script>
 
 
-<style scoped>
+<style src="./estilo.scss"  lang="scss" />
 
-table{
-  border: 1px solid black;
-}
-
-.img_mapa{
-  width: 30%;
-}
-
-</style>
