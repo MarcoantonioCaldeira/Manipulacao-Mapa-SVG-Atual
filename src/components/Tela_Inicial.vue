@@ -5,7 +5,7 @@
   <div class="hello">
     <h1>Selecione o Empreendimento</h1>
 
-    <select v-model="empreendimentoSelecionado" @change="carregarEmpreendimento">
+    <select  id="SelectEmpreendimento" v-model="empreendimentoSelecionado" @change="carregarEmpreendimento">
       <option v-for="empreendimento in empreendimentos" :key="empreendimento.id_empreendimento" :value="empreendimento">
         {{  empreendimento.nome }}
       </option>
@@ -20,6 +20,17 @@
         ref="mapaContainer"
         @load="ClicarEmLote"
       />
+
+      <!-- Botões para zoom -->
+      <!-- <div class="zoom-buttons" ref="zoomButtons">
+        <button  class="btn_zoom" @click="Aumentar_Imagem">
+          <font-awesome-icon :icon="['fas', 'plus']" />
+        </button>
+
+        <button class="btn_zoom" @click="Diminuir_Imagem">
+          <font-awesome-icon :icon="['fas', 'minus']" />
+        </button>
+      </div> -->
     </div>
 
     <div v-if="imoveis.length > 0" >
@@ -49,7 +60,7 @@
       </select> -->
   
 
-      <h1>Imoveis</h1>
+      <h1>Informações dos Imoveis</h1>
       <table v-for="imovel in ImoveisFiltrados" :key="imovel.id_imovel">
         <tr>
           <td>
@@ -68,6 +79,9 @@
       </table>
     </div>
     <p v-else>Nenhum imóvel encontrado.</p>
+
+  
+
   </div>
 </template>
 
@@ -86,6 +100,7 @@ export default {
       imoveis:[],
       filtroCodImovel: "",
       // filtroSituacaoImovel: "",
+      svgContent: null,
     }
   },
 
@@ -197,6 +212,24 @@ export default {
       },
 
 
+      Aumentar_Imagem(){
+        this.nivel_zoon += 0.1;
+        this.Atualizar_Zoom();
+      },
+
+      Diminuir_Imagem(){
+        this.nivel_zoon -= 0.1;
+        this.Atualizar_Zoom();
+      },
+
+      Atualizar_Zoom(){
+        const imagem = document.getElementById('map');
+        if(imagem){
+          imagem.style.transform = `scale(${this.nivel_zoon})`;
+        }
+      },
+
+
 
       //Manipulação Inicial do Mapa
       // configurarCliqueLotes() {
@@ -229,9 +262,7 @@ export default {
           });
 
         }
-
       },
-
     }
   }
 
