@@ -11,7 +11,7 @@ export const api_imoveis = axios.create({
 
 api_empreendimento.interceptors.request.use(
     (config) => {
-        const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaUdlc3RvciIsInN1YiI6IlRpR2VzdG9yIiwiZXhwIjoxNzAxNzgwMDU4LCJpZF91c3VhcmlvIjoxMjh9.GOLj8SorUUdk9xeZgj2P3yL6NI0QC685I2kVz30p3F0";
+        const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaUdlc3RvciIsInN1YiI6IlRpR2VzdG9yIiwiZXhwIjoxNzAxODYzMzY4LCJpZF91c3VhcmlvIjoxMjh9.7QJfegkJB-R0XNZYVCzBqogv6LCmqC7XOcG1jdUscvo";
 
         config.headers.Authorization = `Bearer ${token}`;
         return config;
@@ -21,7 +21,7 @@ api_empreendimento.interceptors.request.use(
 
 api_imoveis.interceptors.request.use(
     (config) => {
-        const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaUdlc3RvciIsInN1YiI6IlRpR2VzdG9yIiwiZXhwIjoxNzAxNzgwMDU4LCJpZF91c3VhcmlvIjoxMjh9.GOLj8SorUUdk9xeZgj2P3yL6NI0QC685I2kVz30p3F0";
+        const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaUdlc3RvciIsInN1YiI6IlRpR2VzdG9yIiwiZXhwIjoxNzAxODYzMzY4LCJpZF91c3VhcmlvIjoxMjh9.7QJfegkJB-R0XNZYVCzBqogv6LCmqC7XOcG1jdUscvo";
 
         config.headers.Authorization = `Bearer ${token}`;
         return config;

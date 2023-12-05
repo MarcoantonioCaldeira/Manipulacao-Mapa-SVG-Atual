@@ -1,8 +1,9 @@
 <template>
   <div class="Topo">
-      
+    <img class="logo"  src="../assets/img/logo.png" /> 
   </div>
   <div class="hello">
+    <h1 class="Titulo">Cadastro de Imoveis</h1>
     <h1>Selecione o Empreendimento</h1>
 
     <select  id="SelectEmpreendimento" v-model="empreendimentoSelecionado" @change="carregarEmpreendimento">
@@ -11,7 +12,7 @@
       </option>
     </select>
 
-    <div  id="Area_Mapa">
+    <div id="Area_Mapa">
       <img
         class="img_mapa"
         v-if="empreendimentoDetalhes && Pegar_Imagem()"
@@ -20,7 +21,6 @@
         ref="mapaContainer"
         @load="ClicarEmLote"
       />
-
       <!-- Botões para zoom -->
       <!-- <div class="zoom-buttons" ref="zoomButtons">
         <button  class="btn_zoom" @click="Aumentar_Imagem">
@@ -33,7 +33,7 @@
       </div> -->
     </div>
 
-    <div v-if="imoveis.length > 0" >
+    <div  class="Area_Info_Imoveis"  v-if="imoveis.length > 0" >
 
       <select id="filtroCodImovel" v-model="filtroCodImovel">
         <option value="">Todas as quadras</option>
@@ -63,6 +63,12 @@
       <h1>Informações dos Imoveis</h1>
       <table v-for="imovel in ImoveisFiltrados" :key="imovel.id_imovel">
         <tr>
+          <th>Cod-Area</th>
+          <th>ID imovel</th>
+          <th>Cod-Imovel</th>
+          <th>Situaçãos</th>
+        </tr>
+        <tr>
           <td>
             {{ imovel.cod_area }}
           </td>
@@ -78,20 +84,23 @@
         </tr>
       </table>
     </div>
-    <p v-else>Nenhum imóvel encontrado.</p>
-
-  
-
+    <p v-else>Nenhum empreendimento selecionado...</p>
   </div>
+  <FooterComponent />
 </template>
 
 <script>
 
 import {api_empreendimento, api_imoveis}  from './services/api'
+import FooterComponent from './Footer.vue'
 
 export default {
 
   name:'Tela_Inicial',
+  components:{
+    FooterComponent
+  },
+
   data(){
     return{
       empreendimentos: [],
