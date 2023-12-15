@@ -1,6 +1,6 @@
 <template>
   <div class="Topo">
-    <img class="logo"  src="../assets/img/logo.png" /> 
+    <img class="logo" src="../assets/img/logo.png" /> 
   </div>
   <div class="hello">
     <h1 class="Titulo">Cadastro de Imoveis</h1>
@@ -54,11 +54,11 @@
       </select>
       
 
-      <!-- <select  id="filtroSituacaoImovel" v-model="filtroSituacaoImovel">
+      <select  id="filtroSituacaoImovel" v-model="filtroSituacaoImovel">
         <option value="">Todas as situações</option>
         <option value="1">Vinculado</option>
         <option value="0">Não vinculado</option>
-      </select> -->
+      </select>
   
 
       <h1>Informações dos Imoveis</h1>
@@ -109,7 +109,7 @@ export default {
       empreendimentoDetalhes: null,
       imoveis:[],
       filtroCodImovel: "",
-      // filtroSituacaoImovel: "",
+      filtroSituacaoImovel: "",
       svgContent: null,
     }
   },
@@ -120,14 +120,16 @@ export default {
     ImoveisFiltrados() {
       return this.imoveis.filter(imovel => {
         const filtroCodImovel = this.filtroCodImovel;
-        // const filtroSituacaoImovel = this.filtroSituacaoImovel;
+        const filtroSituacaoImovel = this.filtroSituacaoImovel;
         // Aplica os filtros
         return (
-          (filtroCodImovel === "" || imovel.cod_area === filtroCodImovel) 
-          // (filtroSituacaoImovel === "" || imovel.situacao === filtroSituacaoImovel)
+          (filtroCodImovel === "" || imovel.cod_area === filtroCodImovel) &&    
+          (filtroSituacaoImovel === "" || imovel.situacao === filtroSituacaoImovel)
         );
       });
-    },
+    }
+
+
   },
 
   mounted(){
@@ -269,7 +271,7 @@ export default {
 
                 if (clickedElement) {
                   // Lógica para mudar a cor do lote clicado ou outras ações
-                  clickedElement.style.fill = 'red';
+                  clickedElement.style.fill = '#b3a632';
                   console.log("Mudando de cor");
                 }
               });

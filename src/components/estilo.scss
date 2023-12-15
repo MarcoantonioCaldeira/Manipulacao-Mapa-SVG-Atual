@@ -161,6 +161,22 @@
       align-items: center;
     }
 
+    #filtroSituacaoImovel{
+      background-color: #CECCCC;
+      padding: 0px 12px;
+      top: 100px;
+      border: 1px solid;
+      box-shadow: 0 4px 8px 0 rgba(32, 32, 32, 0.2), 0 6px 20px 0 rgba(51, 51, 51, 0.19);
+      border-radius: 5px;
+      border-color: #CECCCC;
+      height: 30px;
+      width: 300px;
+      display: flex;
+      margin: auto;
+      margin-top: 25px;
+      align-items: center;
+    }
+
     table{
       width: 100%;
       //border: 1px solid;
