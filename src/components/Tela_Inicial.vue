@@ -13,14 +13,15 @@
     </select>
 
     <div id="Area_Mapa">
-      <img
+      <object
         class="img_mapa"
         v-if="empreendimentoDetalhes && Pegar_Imagem()"
-        :src="Pegar_Imagem()"
+        :data="Pegar_Imagem()"
+        type="image/svg+xml"
         alt="Mapa SVG"
         ref="mapaContainer"
         @load="ClicarEmLote"
-      />
+      ></object>
       <!-- Botões para zoom -->
       <!-- <div class="zoom-buttons" ref="zoomButtons">
         <button  class="btn_zoom" @click="Aumentar_Imagem">
@@ -145,23 +146,23 @@ export default {
           switch(idEmpreendimento) {
 
             case 32:
-              nomeArquivo = 'MAPASVG_32.svg';
+              nomeArquivo = 'mapasvg_32.svg';
               break;
 
             case 35:
-              nomeArquivo = 'MAPASVG_35.svg';
+              nomeArquivo = 'mapasvg_35.svg';
               break;  
               
             case 33:
-              nomeArquivo = 'MAPASVG_33.svg';
+              nomeArquivo = 'mapasvg_33.svg';
               break; 
 
             case 36:
-              nomeArquivo = 'MAPASVG_36.svg';
+              nomeArquivo = 'mapasvg_36.svg';
               break; 
 
             case 34:
-              nomeArquivo = 'MAPASVG_34.svg';
+              nomeArquivo = 'mapasvg_34.svg';
               break; 
 
             default:
@@ -254,24 +255,32 @@ export default {
       //   svgElement.addEventListener('click', this.ClicarEmLote);
       // },
 
-      ClicarEmLote() {
 
-        const obj = this.$refs.mapaContainer;
-        const objElement = obj.querySelector('svg')
+      ClicarEmLote() {
+        const objElement = this.$refs.mapaContainer;
 
         if (objElement) {
+          objElement.addEventListener('load', () => {
+            const svgDocument = objElement.contentDocument;
+            
+            if (svgDocument) {
+              svgDocument.addEventListener('click', (event) => {
+                const clickedElement = event.target.closest('.alote rect');
 
-          objElement.addEventListener('click', (event) => {
-            const clickedElement = event.target.closest('.alote');
-            if (clickedElement) {
-              // Lógica para mudar a cor do lote clicado ou outras ações
-              clickedElement.style.fill = 'red';
-              // console.log("Mudando de cor")
+                if (clickedElement) {
+                  // Lógica para mudar a cor do lote clicado ou outras ações
+                  clickedElement.style.fill = 'red';
+                  console.log("Mudando de cor");
+                }
+              });
             }
           });
-
         }
       },
+
+
+
+
     }
   }
 
